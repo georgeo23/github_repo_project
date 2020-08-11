@@ -1,14 +1,17 @@
+import React from 'react'
+let userData;
+export const loadResult = ({ results: { name } }) => ({
+    type: "LOAD_SEARCH",
+    payload: { name }
+})
 
-export const loadResult = ({ results: { userData } }) => ({ 
-    type: 'SEARCH',
-    payload: { userData } 
-});
 
 export const getData = searchTerm => {
     return async dispatch => {
         try {
-            const userData = await fetchUserData(searchTerm);
-            dispatch(loadResult(userData))
+            userData = await fetchUserData(searchTerm);
+            console.log(userData[0].name)
+            dispatch(loadResult(userData[0].name))
         } catch (err) {
             console.warn(err.message);
         };
@@ -18,9 +21,9 @@ export const getData = searchTerm => {
 // Helpers
 const fetchUserData = async searchTerm => {
     try {
-        // const resp = await fetch(`https://geocode.xyz/${searchTerm}?json=1`);
-        const resp = await fetch(`https://api.github.com/${userInput}/repos`);
+        const resp = await fetch(`https://api.github.com/users/${searchTerm}/repos`);
         const data = await resp.json();
+        
         return data;
     } catch(err) {
         throw new Error(err.message)

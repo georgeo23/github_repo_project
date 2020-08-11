@@ -1,23 +1,26 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { getData } from '../actions/index'
 
 class SearchBar extends Component {
-    state = { userInput: "" }
+    state = { username: "" }
 
     handleSubmit = (e) => {
         e.preventDefault();
-        // add in data from api
+        this.props.username(this.state.username)
     }
     
     handleChange = e => {
-        this.setState({ userInput: e.target.value })
+        this.setState({ username: e.target.value })
     }
+
 
 
     render() {
         return(
             <div>
                 <form onSubmit={this.handleSubmit}>
-                    <input type="text" onChange={this.handleChange} />
+                    <input type="text" onChange={this.handleChange}/>
                     <input type="submit" value="Search" />
                 </form>
             
@@ -26,5 +29,9 @@ class SearchBar extends Component {
     }
 }
 
-export default SearchBar; 
+const mDTP = dispatch => ({
+    username: (name) => dispatch(getData(name))
+})
+
+export default connect(null, mDTP) (SearchBar); 
 

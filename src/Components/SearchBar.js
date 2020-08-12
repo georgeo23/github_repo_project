@@ -6,7 +6,7 @@ class SearchBar extends Component {
     
     handleSubmit = e => {
         e.preventDefault();
-        console.log(this.state.username)
+        
         this.props.getData(this.state.username)
         this.setState({username: ""})
     }

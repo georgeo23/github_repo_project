@@ -13,7 +13,7 @@ export const getData = searchTerm => {
         dispatch(loading(searchTerm))
         try {
             const userData = await fetchUserData(searchTerm);
-            console.log(userData)
+            // console.log(userData)
             dispatch(loadResult(userData));
         } catch (err) {
             console.warn(err.message);

@@ -1,4 +1,4 @@
-const initState = { username: "", results: { data: "" }, loading: false };
+const initState = { username: "", results: { }, loading: false };
 
 const gitHubReducer = (state=initState, action) => {
     switch(action.type){

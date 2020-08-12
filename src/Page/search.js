@@ -5,13 +5,10 @@ import { getData } from '../actions';
 import Result from '../Components/Result.js'
 
 class Search extends Component{
-    state = {
-        data: []
-    }
-
+    
     getData = username => {this.props.getData(username)}
 
-    renderResult = () =>  console.log(this.props.results.userData)
+    renderResult = () =>  <Result results={this.props.results} />
 
     componentDidMount = () => this.props.getData('getfutureproof')
    
@@ -24,9 +21,8 @@ class Search extends Component{
                 <SearchBar getData={ this.getData } />
                     <h3>These are the repos for {this.props.username}</h3>
                     
-                    {this.props.loading ? <p>pls work</p> : this.renderResult() }
+                    {this.props.results.length > 0 ? this.renderResult() : <p>no results</p> }
                     
-                   {/* {this.renderResult()} */}
                     
                     
                         
@@ -43,26 +39,3 @@ export const mSTP = state => ({
 })
 
 export default connect(mSTP, {getData}) (Search);
-
-// import React, { Component } from "react";
-// import FilmCard from "../components/FilmCard";
-
-// class FilmCards extends Component {
-//   state = {
-//     films: [],
-//   };
-//   componentDidMount() {
-//     fetch("https://ghibliapi.herokuapp.com/films")
-//       .then((r) => r.json())
-//       .then((data) => this.setState({ films: data }));
-//   }
-//   render() {
-//     const renderFilms = this.state.films.map((f) => (
-//       <FilmCard key={f.id} film={f} />
-//     ));
-
-//     return <section className="Films">{renderFilms}</section>;
-//   }
-// }
-
-// export default FilmCards;

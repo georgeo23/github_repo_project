@@ -1,13 +1,13 @@
 import React, { Component } from "react";
-import search from "../Page/search";
+// import search from "../Page/search";
 
 class Result extends Component {
   render() {
     return (
       <>
-      <h1>{this.props.username} </h1>
-        <h2 className="title">{this.props.results.userData}</h2>
-        {/* <section className="Films">{this.props.film.description}</section> */}
+      {this.props.results.map((item, idx) => (
+          <p key={idx}>{item.name}</p>
+      ))}
       </>
     );
   }

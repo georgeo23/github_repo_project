@@ -4,7 +4,7 @@ export const loading = username => ({ type: "SEARCH", payload: username})
 
 export const loadResult = (userData) => ({
     type: "LOAD_SEARCH",
-    payload: { userData }
+    payload:  userData 
 })
 
 

@@ -1,11 +1,11 @@
-const initState = { username: "" };
+const initState = { username: "", results: { data: "" }, loading: false };
 
 const gitHubReducer = (state=initState, action) => {
     switch(action.type){
         case 'SEARCH':
-            return { username: action.payload}
+            return { username: action.payload, loading: true}
         case 'LOAD_SEARCH':
-            return { ...state, result: action.payload}
+            return { ...state, results: action.payload, loading: false}
         default:
             return state
     }

@@ -1,22 +1,30 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import SearchBar from '../Components/SearchBar';
-// import { getData } from '../actions';
-
+import { getData } from '../actions';
+import Result from '../Components/Result.js'
 
 class Search extends Component{
-    
+
     getData = username => {this.props.getData(username)}
+
+    renderResult = () => (
+        <p>{this.props.results.userData[0]}</p>)
+
+    componentDidMount = () => this.props.getData('getfutureproof')
     
     render() {
+         
+           
         return (
             <>
                 <div>
-                <SearchBar getResult={ this.getData } />
-                    <h3>Showing repositories for {this.props.data}</h3>
-                    <ul>
+                <SearchBar getData={ this.getData } />
+                    
+                {this.props.loading ? <p>no search</p>  : <h3>These are the repos for {this.props.username}</h3> }
+                    
+                    
                         
-                    </ul>
                 </div>
             </>
         )
@@ -24,8 +32,9 @@ class Search extends Component{
     }
 }
 export const mSTP = state => ({
-    result: state.result,
-    data: state.data
+    results: state.results,
+    username: state.username,
+    loading: state.loading
 })
-export const mDTP = dispatch => ({ getData: name => dispatch({ type: 'LOAD_SEARCH', payload: name})});
-export default connect(mSTP, mDTP) (Search);
+
+export default connect(mSTP, {getData}) (Search);

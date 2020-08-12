@@ -1,17 +1,20 @@
-import React from 'react'
-let userData;
-export const loadResult = ({ results: { name } }) => ({
+// import React from 'react'
+// import renderResults from '../Components/SearchBar'
+export const loading = username => ({ type: "SEARCH", payload: username})
+
+export const loadResult = (userData) => ({
     type: "LOAD_SEARCH",
-    payload: { name }
+    payload: { userData }
 })
 
 
 export const getData = searchTerm => {
     return async dispatch => {
+        dispatch(loading(searchTerm))
         try {
-            userData = await fetchUserData(searchTerm);
-            console.log(userData[0].name)
-            dispatch(loadResult(userData[0].name))
+            const userData = await fetchUserData(searchTerm);
+            console.log(userData)
+            dispatch(loadResult(userData));
         } catch (err) {
             console.warn(err.message);
         };
